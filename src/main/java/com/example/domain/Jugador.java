@@ -15,6 +15,7 @@ import java.time.LocalDate;
 public class Jugador {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @ManyToOne
     private Long identificador;
     private String nombre;
     private LocalDate birthday;
