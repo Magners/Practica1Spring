@@ -148,7 +148,25 @@ public class JugadorService {
         jugador1.setTeam(equipo1);
         jugadorRepository.save(jugador10);
 
+        //Consultas
 
+        System.out.println("Buscar jugadores por nombre, de manera que no sea necesario introducir el nombre completo.");
+        System.out.println(jugadorRepository.findByNombreContaining("a"));
+        System.out.println("Buscar jugadores que hayan conseguido un número mayor o igual a un número de canastas especificado como parámetro.");
+        System.out.println(jugadorRepository.findByCanastasTotatlesGreaterThan(500));
+        System.out.println("Buscar jugadores que hayan efectuado un número de asistencias dentro de un rango especificado como parámetro.");
+        System.out.println(jugadorRepository.findByAsisteniasTotalesBetween(200,800));
+        System.out.println("Buscar jugadores que pertenezcan a una posición específica, por ejemplo: base");
+        System.out.println(jugadorRepository.findByPosicion("base"));
+        System.out.println("Buscar jugadores que hayan nacido en una fecha anterior a una fecha especificada como parámetro.");
+        System.out.println(jugadorRepository.findByBirthdayBefore(LocalDate.of(1995,1,1)));
+
+        //Consultas complejas
+
+        System.out.println("Agrupar los jugadores por la posición del campo y devolver para cada grupo la siguiente información: la media de canastas, asistencias y rebotes.");
+        System.out.println(jugadorRepository.findBy);
+        System.out.println("Lo mismo que el punto anterior pero devolviendo la media, el máximo y el mínimo de canastas, asistencias y rebotes.");
+        System.out.println(jugadorRepository.findBy);
     }
 
 }
