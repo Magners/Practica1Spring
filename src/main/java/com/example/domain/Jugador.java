@@ -15,7 +15,6 @@ import java.time.LocalDate;
 public class Jugador {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @ManyToOne
     private Long identificador;
     private String nombre;
     private LocalDate birthday;
@@ -23,8 +22,18 @@ public class Jugador {
     private int asistenciasTotales;
     private int rebotesTotales;
     private String posicion;
+    @ManyToOne
+    private Equipo team;
 
     public Jugador(){
+    }
+
+    public void setTeam(Equipo team) {
+        this.team = team;
+    }
+
+    public Equipo getTeam() {
+        return team;
     }
 
     public Jugador(String nombre, LocalDate birthday, int canastasTotales, int asistenciasTotales, int rebotesTotales, String posicion) {
