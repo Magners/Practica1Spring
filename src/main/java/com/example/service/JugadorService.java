@@ -198,7 +198,7 @@ public class JugadorService {
         List<Object[]> jugadorult = jugadorRepository.findJugadorMaxCanastasFromTeam();
         for (Object[] posicion : jugadorult){
             System.out.println("nombre: "+posicion[0]);
-            .System.out.println("canastas: "+posicion[1]);
+            System.out.println("canastas: "+posicion[1]);
         }*/
 
 
