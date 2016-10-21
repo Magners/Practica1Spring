@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Created by 47912513V on 17/10/2016.
@@ -30,18 +31,20 @@ public class JugadorService {
         Equipo equipo1 = new Equipo();
         equipo1.setNombre("Equipo1");
         equipo1.setLocalidad("City1");
-        equipo1.setFechaCreacion(LocalDate.of(1994, 7, 6));
+        equipo1.setFechaCreacion(LocalDate.of(1992, 7, 6));
+        equipoRepository.save(equipo1);
 
         Equipo equipo2 = new Equipo();
-        equipo1.setNombre("Equipo1");
-        equipo1.setLocalidad("City2");
-        equipo1.setFechaCreacion(LocalDate.of(1994, 7, 6));
+        equipo2.setNombre("Equipo2");
+        equipo2.setLocalidad("City2");
+        equipo2.setFechaCreacion(LocalDate.of(1995, 7, 6));
+        equipoRepository.save(equipo2);
 
         Equipo equipo3 = new Equipo();
-        equipo1.setNombre("Equipo1");
-        equipo1.setLocalidad("City3");
-        equipo1.setFechaCreacion(LocalDate.of(1994, 7, 6));
-
+        equipo3.setNombre("Equipo3");
+        equipo3.setLocalidad("City1");
+        equipo3.setFechaCreacion(LocalDate.of(1996, 7, 6));
+        equipoRepository.save(equipo3);
         //Jugadores
 
         Jugador jugador1 = new Jugador();
@@ -61,8 +64,9 @@ public class JugadorService {
         jugador2.setAsistenciasTotales(200);
         jugador2.setRebotesTotales(200);
         jugador2.setPosicion("base");
+        jugador2.setTeam(equipo1);
         jugadorRepository.save(jugador2);
-        jugador1.setTeam(equipo1);
+
 
 
         Jugador jugador3 = new Jugador();
@@ -72,7 +76,7 @@ public class JugadorService {
         jugador3.setAsistenciasTotales(300);
         jugador3.setRebotesTotales(300);
         jugador3.setPosicion("base");
-        jugador1.setTeam(equipo1);
+        jugador3.setTeam(equipo1);
         jugadorRepository.save(jugador3);
 
 
@@ -83,7 +87,7 @@ public class JugadorService {
         jugador4.setAsistenciasTotales(400);
         jugador4.setRebotesTotales(400);
         jugador4.setPosicion("ala");
-        jugador1.setTeam(equipo2);
+        jugador4.setTeam(equipo2);
         jugadorRepository.save(jugador4);
 
 
@@ -94,7 +98,7 @@ public class JugadorService {
         jugador5.setAsistenciasTotales(500);
         jugador5.setRebotesTotales(500);
         jugador5.setPosicion("ala");
-        jugador1.setTeam(equipo2);
+        jugador5.setTeam(equipo2);
         jugadorRepository.save(jugador5);
 
 
@@ -105,7 +109,7 @@ public class JugadorService {
         jugador6.setAsistenciasTotales(500);
         jugador6.setRebotesTotales(500);
         jugador6.setPosicion("ala");
-        jugador1.setTeam(equipo2);
+        jugador6.setTeam(equipo2);
         jugadorRepository.save(jugador6);
 
         Jugador jugador7 = new Jugador();
@@ -115,7 +119,7 @@ public class JugadorService {
         jugador7.setAsistenciasTotales(600);
         jugador7.setRebotesTotales(600);
         jugador7.setPosicion("pivot");
-        jugador1.setTeam(equipo3);
+        jugador7.setTeam(equipo3);
         jugadorRepository.save(jugador7);
 
         Jugador jugador8 = new Jugador();
@@ -125,7 +129,7 @@ public class JugadorService {
         jugador8.setAsistenciasTotales(700);
         jugador8.setRebotesTotales(700);
         jugador8.setPosicion("pivot");
-        jugador1.setTeam(equipo3);
+        jugador8.setTeam(equipo3);
         jugadorRepository.save(jugador8);
 
         Jugador jugador9 = new Jugador();
@@ -135,7 +139,7 @@ public class JugadorService {
         jugador9.setAsistenciasTotales(800);
         jugador9.setRebotesTotales(800);
         jugador9.setPosicion("pivot");
-        jugador1.setTeam(equipo3);
+        jugador9.setTeam(equipo3);
         jugadorRepository.save(jugador9);
 
         Jugador jugador10 = new Jugador();
@@ -145,7 +149,7 @@ public class JugadorService {
         jugador10.setAsistenciasTotales(900);
         jugador10.setRebotesTotales(900);
         jugador10.setPosicion("pivot");
-        jugador1.setTeam(equipo1);
+        jugador10.setTeam(equipo1);
         jugadorRepository.save(jugador10);
 
         //Consultas
@@ -153,9 +157,9 @@ public class JugadorService {
         System.out.println("Buscar jugadores por nombre, de manera que no sea necesario introducir el nombre completo.");
         System.out.println(jugadorRepository.findByNombreContaining("a"));
         System.out.println("Buscar jugadores que hayan conseguido un número mayor o igual a un número de canastas especificado como parámetro.");
-        System.out.println(jugadorRepository.findByCanastasTotatlesGreaterThan(500));
+        System.out.println(jugadorRepository.findByCanastasTotalesGreaterThan(500));
         System.out.println("Buscar jugadores que hayan efectuado un número de asistencias dentro de un rango especificado como parámetro.");
-        System.out.println(jugadorRepository.findByAsisteniasTotalesBetween(200,800));
+        System.out.println(jugadorRepository.findByasistenciasTotalesBetween(200,800));
         System.out.println("Buscar jugadores que pertenezcan a una posición específica, por ejemplo: base");
         System.out.println(jugadorRepository.findByPosicion("base"));
         System.out.println("Buscar jugadores que hayan nacido en una fecha anterior a una fecha especificada como parámetro.");
@@ -163,10 +167,56 @@ public class JugadorService {
 
         //Consultas complejas
 
-        System.out.println("Agrupar los jugadores por la posición del campo y devolver para cada grupo la siguiente información: la media de canastas, asistencias y rebotes.");
+        System.out.println("AVG per position");
+        List<Object[]> jugadorList = jugadorRepository.findAVGStatisticsFromPosition();
+        for (Object[] posicion : jugadorList) //Object - Jugador?
+        {
+            System.out.println("Posicion: "+posicion[0]);
+            System.out.println("AVG Canastas: "+posicion[1]);
+            System.out.println("AVG Asistencias: "+posicion[2]);
+            System.out.println("AVG Rebotes: "+posicion[3]);
+        }
+
+        System.out.println("AVG,MIN,MAX per position");
+        List<Object[]> jugadorListComp = jugadorRepository.findAVGMINMAXStatisticsFromPosition();
+        for (Object[] posicion : jugadorListComp) //Object - Jugador?
+        {
+            System.out.println("Posicion: "+posicion[0]);
+            System.out.println("AVG Canastas: "+posicion[1]);
+            System.out.println("AVG Asistencias: "+posicion[2]);
+            System.out.println("AVG Rebotes: "+posicion[3]);
+            System.out.println("MAX Canastas: "+posicion[4]);
+            System.out.println("MAX Asistencias: "+posicion[5]);
+            System.out.println("MAX Rebotes: "+posicion[6]);
+            System.out.println("MIN Canastas: "+posicion[7]);
+            System.out.println("MIN Asistencias: "+posicion[8]);
+            System.out.println("MIN Rebotes: "+posicion[9]);
+
+        }
+
+        /*System.out.println("last");
+        List<Object[]> jugadorult = jugadorRepository.findJugadorMaxCanastasFromTeam();
+        for (Object[] posicion : jugadorult){
+            System.out.println("nombre: "+posicion[0]);
+            System.out.println("canastas: "+posicion[1]);
+        }*/
+
+
+        //Consultas equipo
+
+        System.out.println("Consulta los equipos existentes en una localidad determinada");
+        System.out.println(equipoRepository.findByLocalidad("City1"));
+        System.out.println("Jugadores de un Equipo");
+        System.out.println(jugadorRepository.findByTeamNombre("equipo1"));
+        System.out.println("Jugadores de un equipo y posicion");
+        System.out.println(jugadorRepository.findByTeamNombreAndPosicion("equipo1", "base"));
+        //System.out.println("Jugador mas canastas dentro de equipo " +jugadorRepository.findJugadorMaxCanastasFromTeam("equipo1"));
+        //Devuelve el jugador que más canastas ha realizado de un equipo determinado como parámetro.
+
+        /*System.out.println("Agrupar los jugadores por la posición del campo y devolver para cada grupo la siguiente información: la media de canastas, asistencias y rebotes.");
         System.out.println(jugadorRepository.findBy);
         System.out.println("Lo mismo que el punto anterior pero devolviendo la media, el máximo y el mínimo de canastas, asistencias y rebotes.");
-        System.out.println(jugadorRepository.findBy);
+        System.out.println(jugadorRepository.findBy);*/
     }
 
 }
