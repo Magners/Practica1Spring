@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.service.EquipoService;
 import com.example.service.JugadorService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,8 +16,9 @@ public class Practica1SpringApplication {
 
     public static void main(String[] args) {
         //SpringApplication.run(Practica1SpringApplication.class, args);
-            ConfigurableApplicationContext context = SpringApplication.run(Practica1SpringApplication.class, args);
+        ConfigurableApplicationContext context = SpringApplication.run(Practica1SpringApplication.class, args);
         context.getBean(JugadorService.class).testJugadores();
+        context.getBean(EquipoService.class).testEquipos();
         /*ConfigurableApplicationContext context= SpringApplication.run(CarApplication.class, args);
 
         CarService carService=context.getBean(CarService.class);

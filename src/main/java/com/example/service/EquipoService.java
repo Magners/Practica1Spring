@@ -19,7 +19,7 @@ public class EquipoService {
     @Autowired
     private JugadorRepository jugadorRepository;
 
-    public void testequipos(){
+    public void testEquipos(){
         /*Equipo equipo1 = new Equipo();
         equipo1.setNombre("Equipo1");
         equipo1.setLocalidad("City1");

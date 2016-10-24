@@ -17,10 +17,6 @@ import java.util.List;
 public class JugadorService {
     @Autowired
     private JugadorRepository jugadorRepository;
-
-    /*public JugadorService() {
-        super();
-    }*/
     @Autowired
     private EquipoRepository equipoRepository;
 
@@ -45,6 +41,8 @@ public class JugadorService {
         equipo3.setLocalidad("City1");
         equipo3.setFechaCreacion(LocalDate.of(1996, 7, 6));
         equipoRepository.save(equipo3);
+
+
         //Jugadores
 
         Jugador jugador1 = new Jugador();
@@ -194,13 +192,7 @@ public class JugadorService {
 
         }
 
-        /*System.out.println("last");
-        List<Object[]> jugadorult = jugadorRepository.findJugadorMaxCanastasFromTeam();
-        for (Object[] posicion : jugadorult){
-            System.out.println("nombre: "+posicion[0]);
-            System.out.println("canastas: "+posicion[1]);
-        }*/
-
+        System.out.println("Jugador con mas puntos de Equipo2: "+jugadorRepository.findMaxPointsPlayerByTeam(equipo2));
 
         //Consultas equipo
 
@@ -210,13 +202,7 @@ public class JugadorService {
         System.out.println(jugadorRepository.findByTeamNombre("equipo1"));
         System.out.println("Jugadores de un equipo y posicion");
         System.out.println(jugadorRepository.findByTeamNombreAndPosicion("equipo1", "base"));
-        //System.out.println("Jugador mas canastas dentro de equipo " +jugadorRepository.findJugadorMaxCanastasFromTeam("equipo1"));
-        //Devuelve el jugador que más canastas ha realizado de un equipo determinado como parámetro.
 
-        /*System.out.println("Agrupar los jugadores por la posición del campo y devolver para cada grupo la siguiente información: la media de canastas, asistencias y rebotes.");
-        System.out.println(jugadorRepository.findBy);
-        System.out.println("Lo mismo que el punto anterior pero devolviendo la media, el máximo y el mínimo de canastas, asistencias y rebotes.");
-        System.out.println(jugadorRepository.findBy);*/
     }
 
 }
